@@ -1,0 +1,838 @@
+<html lang="en"><head>
+<!-- Meta Pixel + CAPI -->
+<script>
+// Meta Pixel
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1565047858381586');
+fbq('track', 'PageView');
+
+// CAPI helpers
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : undefined;
+}
+function sendCAPI(eventName) {
+  try {
+    fetch('/.netlify/functions/meta-capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        eventName: eventName,
+        eventSourceUrl: window.location.href,
+        clientUserAgent: navigator.userAgent,
+        fbp: getCookie('_fbp'),
+        fbc: getCookie('_fbc')
+      })
+    }).catch(function(){});
+  } catch(e) {}
+}
+document.addEventListener('DOMContentLoaded', function() {
+  sendCAPI('PageView');
+  // Wire Lead events
+  var applyBtns = document.querySelectorAll('a[href="#contact"], .cta-button, [data-capi="lead"]');
+  applyBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { sendCAPI('Lead'); fbq('track','Lead'); });
+  });
+  var whatsappBtn = document.querySelector('a[href*="wa.link"], a[href*="whatsapp"]');
+  if (whatsappBtn) whatsappBtn.addEventListener('click', function() { sendCAPI('Lead'); fbq('track','Lead'); });
+  var emailBtn = document.querySelector('a[href*="formspree"], a[href*="mailto"], form');
+  if (emailBtn) emailBtn.addEventListener('submit', function() { sendCAPI('Lead'); fbq('track','Lead'); });
+});
+</script><script>window.__resources = {};</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCG Elite Finance — Fast, Flexible Financing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<script>
+/* Load all webfonts from the Google Fonts CDN at runtime via a JS-injected
+   <link>. The static bundler can't see this link, so NO @font-face / blob URLs
+   get inlined — keeping the standalone file tiny and CDN fonts working on any host. */
+(function(){
+  var l=document.createElement('link');
+  l.rel='stylesheet';
+  l.href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap';
+  document.head.appendChild(l);
+})();
+</script>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg-2:#0a0e14;
+    --sidebar-bg:#161b22;
+    --panel:#161f2b;
+    --card:#1e2d3d;
+    --card-2:#182636;
+    --border:#243446;
+    --border-2:#30465c;
+    --accent:#00d4b4;
+    --accent-2:#16f0cd;
+    --accent-dim:rgba(0,212,180,.12);
+    --white:#eef3f8;
+    --muted:#90a2b6;
+    --faint:#5f7088;
+    --wa:#25d366;
+    --tg:#29a9eb;
+    --display:'Space Grotesk','Noto Sans SC',sans-serif;
+    --body:'Manrope','Noto Sans SC',sans-serif;
+    --sidebar:52px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--white);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.55;}
+  ::selection{background:var(--accent);color:#06231f;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  body.zh{line-height:1.72;}
+  body.zh .eyebrow,body.zh .sec-tag,body.zh .kicker{letter-spacing:.12em;}
+
+  /* ---------------- SIDEBAR ---------------- */
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);z-index:60;
+    background:var(--sidebar-bg);border-right:1px solid var(--border);
+    display:flex;flex-direction:column;align-items:center;padding:11px 0;gap:5px;
+  }
+  .sb-logo{
+    width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--accent),var(--accent-2));color:#06231f;
+    font-family:var(--display);font-weight:700;font-size:16px;
+    box-shadow:0 0 18px -2px rgba(0,212,180,.7);margin-bottom:8px;flex:0 0 auto;
+  }
+  .sb-icon{position:relative;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:var(--faint);cursor:pointer;transition:color .22s,background .22s,box-shadow .22s;flex:0 0 auto;}
+  .sb-icon svg{width:20px;height:20px;}
+  .sb-icon:hover{color:var(--accent);background:var(--accent-dim);box-shadow:0 0 16px -4px rgba(0,212,180,.55);}
+  .sb-icon::after{content:attr(data-tip);position:absolute;left:46px;top:50%;transform:translateY(-50%) translateX(-6px);background:#05080d;border:1px solid var(--border-2);color:var(--white);font-size:12px;font-weight:600;white-space:nowrap;padding:6px 11px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:5;}
+  .sb-icon:hover::after{opacity:1;transform:translateY(-50%) translateX(0);}
+  .sb-spacer{flex:1 1 auto;}
+  .sb-icon.wa:hover{color:var(--wa);box-shadow:0 0 16px -4px rgba(37,211,102,.6);background:rgba(37,211,102,.12);}
+
+  .shell{margin-left:var(--sidebar);}
+
+  /* ---------------- NAVBAR ---------------- */
+  header{
+    position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:24px;
+    padding:0 clamp(18px,3.2vw,38px);height:62px;
+    background:rgba(13,17,23,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;flex:0 0 auto;}
+  .logo .mark{width:29px;height:29px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(150deg,var(--accent),var(--accent-2));color:#06231f;font-size:14px;box-shadow:0 0 16px -3px rgba(0,212,180,.7);}
+  .logo .name{font-size:16.5px;letter-spacing:.01em;color:var(--white);}
+  .logo .name em{font-style:normal;color:var(--accent);}
+  .nav-links{display:flex;align-items:center;gap:2px;margin-left:8px;}
+  .nav-links a{color:var(--muted);font-size:13.5px;font-weight:600;padding:8px 13px;border-radius:8px;transition:color .2s,background .2s;}
+  .nav-links a:hover{color:var(--white);background:var(--panel);}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:9px;}
+  .lang-toggle{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:7px 11px;cursor:pointer;font-family:var(--body);font-size:12px;font-weight:700;color:var(--faint);transition:border-color .2s;letter-spacing:.03em;}
+  .lang-toggle:hover{border-color:var(--border-2);}
+  .lang-toggle .div{opacity:.4;font-weight:400;}
+  .lang-toggle span[data-lang].active{color:var(--accent);}
+  .btn{font-family:var(--body);font-weight:700;cursor:pointer;border:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s,border-color .25s,color .2s;}
+  .nav-ghost{background:transparent;border:1px solid transparent;color:var(--muted);font-size:13.5px;padding:8px 13px;border-radius:9px;}
+  .nav-ghost:hover{color:var(--white);background:var(--panel);}
+  .nav-rewards{background:var(--panel);border:1px solid var(--border-2);color:var(--white);font-size:13px;padding:8px 14px;border-radius:9px;}
+  .nav-rewards:hover{border-color:var(--accent);color:var(--accent);}
+  .nav-rewards .gem{width:8px;height:8px;border-radius:2px;transform:rotate(45deg);background:var(--accent);box-shadow:0 0 8px var(--accent);}
+  .btn-join{background:linear-gradient(150deg,var(--accent),var(--accent-2));color:#06231f;font-size:13.5px;padding:9px 20px;border-radius:100px;box-shadow:0 8px 24px -10px rgba(0,212,180,.8);}
+  .btn-join:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(0,212,180,1);}
+  @media(max-width:900px){.nav-links{display:none;}.nav-ghost{display:none;}}
+
+  /* ---------------- shared ---------------- */
+  .container{max-width:1160px;margin:0 auto;padding:0 clamp(18px,3.2vw,38px);}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(0,212,180,.28);padding:7px 14px;border-radius:100px;}
+  .eyebrow .pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(0,212,180,.6);animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,212,180,.55);}70%{box-shadow:0 0 0 8px rgba(0,212,180,0);}100%{box-shadow:0 0 0 0 rgba(0,212,180,0);}}
+  .sec-tag{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);}
+  .sec-head{font-family:var(--display);font-weight:600;font-size:clamp(24px,3vw,36px);line-height:1.12;letter-spacing:-.01em;margin-top:11px;color:var(--white);}
+  .sec-head em{font-style:normal;color:var(--accent);}
+  .sec-sub{color:var(--muted);font-size:14.5px;max-width:58ch;margin-top:13px;font-weight:500;}
+  section{padding:clamp(52px,6.5vw,84px) 0;}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------------- HERO ---------------- */
+  .hero{position:relative;padding:48px 0;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(56% 55% at 80% 18%,rgba(0,212,180,.16),transparent 60%),radial-gradient(50% 50% at 8% 30%,rgba(22,240,205,.07),transparent 62%);}
+  .hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(0,212,180,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,180,.04) 1px,transparent 1px);background-size:52px 52px;-webkit-mask:radial-gradient(120% 80% at 72% 0%,#000,transparent 72%);mask:radial-gradient(120% 80% at 72% 0%,#000,transparent 72%);}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(26px,4vw,52px);align-items:start;}
+  .hero h1{font-family:var(--display);font-weight:500;font-size:clamp(31px,4.1vw,52px);line-height:1.1;letter-spacing:-.012em;margin:20px 0 0;text-wrap:balance;color:var(--white);}
+  .hero h1 .accent{font-weight:700;background:linear-gradient(150deg,var(--accent-2),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero .lede{color:var(--muted);font-size:clamp(15px,1.3vw,16.5px);max-width:46ch;margin-top:18px;font-weight:500;}
+  .hero-cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
+  .btn-lg{font-size:15px;padding:15px 28px;border-radius:12px;}
+  .btn-primary{background:linear-gradient(150deg,var(--accent),var(--accent-2));color:#06231f;box-shadow:0 14px 38px -14px rgba(0,212,180,.9);}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 46px -14px rgba(0,212,180,1);}
+
+  /* or divider + quick login */
+  .or-row{display:flex;align-items:center;gap:14px;margin:24px 0 16px;max-width:380px;}
+  .or-row .line{flex:1;height:1px;background:var(--border);}
+  .or-row .or{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
+  .quick-logins{display:flex;gap:11px;}
+  .qlogin{position:relative;display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-size:13.5px;font-weight:600;color:var(--white);cursor:pointer;transition:border-color .2s,background .2s,transform .2s;}
+  .qlogin svg{width:18px;height:18px;}
+  .qlogin.wa svg{color:var(--wa);}
+  .qlogin.em svg{color:var(--accent);}
+  .qlogin.tg svg{color:var(--tg);}
+  .qlogin:hover{transform:translateY(-2px);background:#22344a;}
+  .qlogin.wa:hover{border-color:var(--wa);}
+  .qlogin.em:hover{border-color:var(--accent);}
+  .qlogin.tg:hover{border-color:var(--tg);}
+
+  /* ---------------- HERO DECORATIVE CSS ART ---------------- */
+  .hero-art{position:relative;min-height:340px;display:grid;place-items:center;}
+  .art-rings{position:absolute;width:min(440px,90%);aspect-ratio:1;border-radius:50%;}
+  .art-rings .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(0,212,180,.18);}
+  .art-rings .ring.r2{inset:13%;border-color:rgba(0,212,180,.26);}
+  .art-rings .ring.r3{inset:27%;border-color:rgba(0,212,180,.4);}
+  .art-glow{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(0,212,180,.32),transparent 66%);filter:blur(6px);}
+  .art-spin{position:absolute;width:min(440px,90%);aspect-ratio:1;animation:spin 26s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .art-spin .dot{position:absolute;top:50%;left:50%;width:11px;height:11px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 14px 2px rgba(0,212,180,.9);}
+  .art-spin .dot.d1{transform:translate(-50%,-50%) rotate(0deg) translateY(-50%);}
+  .art-spin .dot.d2{width:7px;height:7px;transform:translate(-50%,-50%) rotate(140deg) translateY(-50%);opacity:.7;}
+  .art-spin .dot.d3{width:9px;height:9px;transform:translate(-50%,-50%) rotate(255deg) translateY(-50%);opacity:.85;}
+  /* floating card */
+  .art-card{position:relative;z-index:2;width:min(290px,80%);background:linear-gradient(165deg,var(--card),var(--card-2));border:1px solid var(--border-2);border-radius:18px;padding:22px;box-shadow:0 36px 90px -40px rgba(0,0,0,.95);animation:float 5.5s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(-7px);}50%{transform:translateY(7px);}}
+  .art-card::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(150deg,rgba(0,212,180,.6),transparent 50%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+  .ac-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+  .ac-chip{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);padding:5px 10px;border-radius:7px;}
+  .ac-live{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--muted);}
+  .ac-live i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s infinite;}
+  .ac-amt{font-family:var(--display);font-weight:700;font-size:34px;color:var(--white);line-height:1;}
+  .ac-amt em{font-style:normal;color:var(--accent);font-size:18px;vertical-align:6px;margin-right:2px;}
+  .ac-lab{font-size:12px;color:var(--faint);font-weight:600;margin-top:7px;}
+  .ac-bar{height:7px;border-radius:5px;background:var(--bg-2);margin-top:18px;overflow:hidden;}
+  .ac-bar i{display:block;height:100%;width:78%;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 12px rgba(0,212,180,.6);}
+  .ac-row{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);font-weight:600;margin-top:9px;}
+  @media(max-width:920px){.hero-grid{grid-template-columns:1fr;}.hero-art{min-height:320px;}}
+
+  /* ---------------- PAYMENT BAR ---------------- */
+  .paybar{padding-top:0;}
+  .paybar-card{display:flex;align-items:center;gap:22px;flex-wrap:wrap;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 24px;}
+  .paybar-card .pl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);flex:0 0 auto;}
+  .pay-icons{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .pay-ico{display:inline-flex;align-items:center;gap:8px;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:9px 14px;font-family:var(--display);font-size:13px;font-weight:600;color:var(--muted);transition:color .2s,border-color .2s;}
+  .pay-ico svg{width:17px;height:17px;color:var(--accent);}
+  .pay-ico:hover{color:var(--white);border-color:var(--border-2);}
+
+  /* ---------------- PRODUCT CARDS ---------------- */
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
+  .pcard{position:relative;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px 24px 24px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;}
+  .pcard::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;opacity:0;background:linear-gradient(160deg,var(--accent),transparent 55%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;transition:opacity .3s;pointer-events:none;}
+  .pcard:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 30px 70px -34px rgba(0,0,0,.95),0 0 42px -12px rgba(0,212,180,.45);}
+  .pcard:hover::before{opacity:1;}
+  .pc-tag{position:absolute;top:18px;right:18px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(0,212,180,.28);padding:5px 10px;border-radius:7px;}
+  .pc-ico{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;color:var(--accent);margin-bottom:20px;background:radial-gradient(circle at 38% 30%,rgba(0,212,180,.2),transparent 70%);border:1px solid rgba(0,212,180,.3);box-shadow:0 0 26px -10px rgba(0,212,180,.6);}
+  .pc-ico svg{width:28px;height:28px;}
+  .pc-zh{font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--accent);margin-bottom:8px;}
+  .pcard h3{font-family:var(--display);font-weight:700;font-size:21px;color:var(--white);margin-bottom:9px;}
+  .pcard p{color:var(--muted);font-size:13.6px;font-weight:500;line-height:1.6;min-height:66px;}
+  .pc-amt{display:flex;align-items:baseline;gap:8px;margin:18px 0 16px;padding-top:16px;border-top:1px solid var(--border);}
+  .pc-amt .lab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);}
+  .pc-amt .val{font-family:var(--display);font-weight:700;font-size:24px;color:var(--accent);margin-left:auto;}
+  .pc-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--panel);border:1px solid var(--border-2);color:var(--white);font-weight:700;font-size:14px;padding:13px;border-radius:11px;transition:background .25s,color .25s,border-color .25s;}
+  .pcard:hover .pc-cta{background:linear-gradient(150deg,var(--accent),var(--accent-2));color:#06231f;border-color:transparent;}
+  @media(max-width:880px){.prod-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto;}}
+
+  /* ---------------- FEATURE ROW ---------------- */
+  .feat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;}
+  .feat{display:flex;flex-direction:column;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:15px;padding:22px 20px;transition:border-color .25s,transform .25s;}
+  .feat:hover{border-color:var(--border-2);transform:translateY(-4px);}
+  .feat .ico{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(0,212,180,.25);}
+  .feat .ico svg{width:22px;height:22px;}
+  .feat h4{font-family:var(--display);font-weight:600;font-size:16px;color:var(--white);}
+  .feat p{color:var(--muted);font-size:12.8px;font-weight:500;line-height:1.55;}
+  @media(max-width:880px){.feat-row{grid-template-columns:1fr 1fr;}}
+
+  /* ---------------- EDUCATIONAL SECTION ---------------- */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px;}
+  .edu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 26px;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;}
+  .edu-card:hover{transform:translateY(-4px);border-color:var(--border-2);box-shadow:0 26px 60px -36px rgba(0,0,0,.9),0 0 34px -14px rgba(0,212,180,.35);}
+  .edu-card.wide{grid-column:1 / -1;}
+  .edu-ico{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(0,212,180,.28);margin-bottom:18px;box-shadow:0 0 24px -10px rgba(0,212,180,.55);}
+  .edu-ico svg{width:24px;height:24px;}
+  .edu-card h3{font-family:var(--display);font-weight:600;font-size:19px;color:var(--white);margin-bottom:11px;line-height:1.25;}
+  .edu-card p{color:var(--muted);font-size:14px;font-weight:500;line-height:1.65;}
+  .edu-card p b{color:var(--white);font-weight:700;}
+  .edu-steps{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+  .estep{display:flex;align-items:center;gap:12px;background:var(--bg-2);border:1px solid var(--border);border-radius:11px;padding:11px 14px;font-size:13.4px;font-weight:600;color:var(--white);}
+  .estep .en{width:25px;height:25px;border-radius:7px;flex:0 0 auto;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:12px;color:#06231f;background:linear-gradient(150deg,var(--accent),var(--accent-2));box-shadow:0 0 14px -4px rgba(0,212,180,.7);}
+  .estep .et small{display:block;font-size:11px;font-weight:600;color:var(--faint);margin-top:1px;}
+  .edu-list{display:flex;flex-direction:column;gap:9px;margin:4px 0 14px;}
+  .erow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;}
+  .erow .k{font-size:13px;font-weight:600;color:var(--muted);}
+  .erow .v{font-family:var(--display);font-weight:700;font-size:14px;color:var(--accent);white-space:nowrap;}
+  .edu-note{display:inline-flex;align-items:center;gap:9px;margin-top:16px;font-size:13px;font-weight:600;color:var(--accent);}
+  .edu-note svg{width:17px;height:17px;flex:0 0 auto;}
+
+  /* ---------------- HAMBURGER + MOBILE MENU ---------------- */
+  .hamburger{display:none;width:40px;height:40px;border-radius:9px;border:1px solid var(--border);background:var(--panel);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;}
+  .hamburger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--white);transition:transform .25s,opacity .25s;}
+  .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+  .mobile-menu{display:none;}
+
+  /* ---------------- MOBILE (<768px) ---------------- */
+  @media(max-width:768px){
+    .sidebar{display:none;}
+    .shell{margin-left:0;}
+    header{gap:12px;height:58px;padding:0 16px;}
+    .nav-links{display:none;}
+    .nav-right .lang-toggle,.nav-right .nav-rewards,.nav-right .nav-ghost,.nav-right .btn-join{display:none;}
+    .hamburger{display:flex;}
+    .mobile-menu{position:fixed;top:58px;left:0;right:0;z-index:49;display:flex;flex-direction:column;gap:3px;padding:14px 16px 18px;background:var(--bg-2);border-bottom:1px solid var(--border);box-shadow:0 24px 50px -24px rgba(0,0,0,.85);transform:translateY(-14px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s;}
+    .mobile-menu.open{transform:none;opacity:1;visibility:visible;}
+    .mm-link{color:var(--white);font-size:15.5px;font-weight:600;padding:13px 12px;border-radius:10px;}
+    .mm-link:active,.mm-link:hover{background:var(--panel);}
+    .mm-actions{display:flex;flex-direction:column;gap:10px;margin-top:12px;padding-top:14px;border-top:1px solid var(--border);}
+    .mm-actions .btn{width:100%;padding:13px;font-size:14.5px;}
+    .mm-actions .lang-toggle{align-self:flex-start;}
+    .container{padding:0 16px;}
+    .hero{padding-top:26px;}
+    .hero-art{display:block;min-height:0;margin-top:24px;}
+    .hero-art .art-glow,.hero-art .art-rings,.hero-art .art-spin{display:none;}
+    .hero-art .art-card{width:100%;max-width:100%;animation:none;margin:0;}
+    .hero-grid{grid-template-columns:1fr;gap:0;}
+    .hero h1{font-size:clamp(27px,7.6vw,38px);margin-top:16px;}
+    .hero .lede{font-size:15px;margin-top:16px;}
+    .hero-cta{margin-top:24px;}
+    .hero-cta .btn-lg{width:100%;}
+    .or-row{max-width:none;margin:22px 0 14px;}
+    .quick-logins{gap:10px;}
+    .quick-logins .qlogin{flex:1 1 0;justify-content:center;min-width:0;}
+    .paybar-card{padding:18px 16px;gap:14px;}
+    .prod-grid{grid-template-columns:1fr;max-width:none;}
+    .pcard p{min-height:0;}
+    .feat-row{grid-template-columns:1fr 1fr;gap:12px;}
+    .feat{padding:18px 16px;}
+    .feat h4{font-size:15px;}
+    .feat p{font-size:12.4px;}
+    .edu-grid{grid-template-columns:1fr;}
+    .edu-card.wide{grid-column:auto;}
+    .edu-card{padding:24px 20px;}
+    .blog-grid{grid-template-columns:1fr;max-width:none;}
+    .blog-head{align-items:flex-start;}
+    .footer-grid{flex-direction:column;gap:30px;}
+  }
+  @media(max-width:380px){
+    .feat-row{grid-template-columns:1fr;}
+    .quick-logins{flex-direction:column;}
+  }
+
+  /* ---------------- NEWS / BLOG ---------------- */
+  .blog-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px;}
+  .post{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;}
+  .post:hover{transform:translateY(-6px);border-color:var(--border-2);box-shadow:0 28px 64px -36px rgba(0,0,0,.9),0 0 32px -14px rgba(0,212,180,.35);}
+  .post-thumb{position:relative;height:140px;background:linear-gradient(135deg,#11313a,#0c2230);display:grid;place-items:center;overflow:hidden;}
+  .post-thumb::before{content:"";position:absolute;inset:0;opacity:.4;background-image:repeating-linear-gradient(45deg,rgba(0,212,180,.08) 0 12px,transparent 12px 24px);}
+  .post-thumb .pico{position:relative;color:var(--accent);opacity:.9;}
+  .post-thumb .pico svg{width:46px;height:46px;}
+  .post-cat{position:absolute;top:12px;left:12px;z-index:1;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:rgba(5,8,13,.7);border:1px solid rgba(0,212,180,.3);padding:5px 10px;border-radius:7px;backdrop-filter:blur(4px);}
+  .post-body{padding:20px;display:flex;flex-direction:column;flex:1;}
+  .post .date{font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--faint);}
+  .post h4{font-family:var(--display);font-weight:600;font-size:17px;color:var(--white);margin:8px 0 9px;line-height:1.3;}
+  .post p{color:var(--muted);font-size:13px;font-weight:500;line-height:1.55;flex:1;}
+  .post .read{margin-top:15px;font-size:13px;font-weight:700;color:var(--accent);display:inline-flex;align-items:center;gap:7px;transition:gap .2s;}
+  .post:hover .read{gap:11px;}
+  @media(max-width:880px){.blog-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto;}}
+
+  /* ---------------- FOOTER CTA ---------------- */
+  .foot-cta{text-align:center;position:relative;}
+  .foot-cta::before{content:"";position:absolute;top:50%;left:50%;width:min(620px,90vw);height:360px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,212,180,.16),transparent 64%);pointer-events:none;}
+  .foot-cta h2{position:relative;font-family:var(--display);font-weight:600;font-size:clamp(28px,4vw,48px);line-height:1.08;max-width:16ch;margin:0 auto;color:var(--white);}
+  .foot-cta h2 em{font-style:normal;background:linear-gradient(150deg,var(--accent-2),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .foot-cta p{position:relative;color:var(--muted);max-width:46ch;margin:16px auto 0;font-weight:500;font-size:15px;}
+  .foot-cta .hero-cta{position:relative;justify-content:center;margin-top:30px;}
+  .btn-wa{background:var(--wa);color:#04230f;box-shadow:0 14px 38px -16px rgba(37,211,102,.85);}
+  .btn-wa:hover{transform:translateY(-3px);box-shadow:0 20px 46px -14px rgba(37,211,102,1);}
+  .btn-wa svg{width:18px;height:18px;}
+
+  /* ---------------- FOOTER ---------------- */
+  footer{border-top:1px solid var(--border);background:var(--bg-2);}
+  .footer-grid{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;padding-top:46px;padding-bottom:28px;}
+  footer .logo{margin-bottom:14px;}
+  footer .f-desc{color:var(--faint);font-size:13.5px;max-width:34ch;line-height:1.6;margin-bottom:14px;}
+  .foot-wa{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-size:13.5px;font-weight:600;transition:color .2s;}
+  .foot-wa:hover{color:var(--wa);}
+  .foot-wa svg{width:17px;height:17px;color:var(--wa);}
+  .f-cols{display:flex;gap:clamp(28px,6vw,68px);flex-wrap:wrap;}
+  .f-col h5{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}
+  .f-col a{display:block;color:var(--muted);font-size:13.6px;font-weight:500;margin-bottom:10px;transition:color .2s;}
+  .f-col a:hover{color:var(--accent);}
+  .copyright{border-top:1px solid var(--border);padding:20px 0;color:var(--faint);font-size:12.5px;}
+
+  /* ---------------- MODAL ---------------- */
+  .modal-overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(5,8,13,.8);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;}
+  .modal-overlay.open{opacity:1;visibility:visible;}
+  .modal{position:relative;width:min(440px,100%);max-height:92vh;overflow-y:auto;background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--border-2);border-radius:20px;padding:34px 30px 30px;box-shadow:0 50px 120px -30px rgba(0,0,0,.95);transform:translateY(22px) scale(.97);opacity:0;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .4s;}
+  .modal-overlay.open .modal{transform:none;opacity:1;}
+  .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:9px;border:1px solid var(--border);background:var(--panel);color:var(--muted);font-size:17px;cursor:pointer;display:grid;place-items:center;transition:all .22s;z-index:2;}
+  .modal-close:hover{color:var(--white);border-color:var(--accent);}
+  .m-kicker{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  .modal h3{font-family:var(--display);font-weight:700;font-size:24px;margin:9px 0 6px;color:var(--white);}
+  .m-sub{color:var(--muted);font-size:13.5px;font-weight:500;margin-bottom:22px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:11.5px;letter-spacing:.06em;color:var(--faint);margin-bottom:7px;text-transform:uppercase;font-weight:600;}
+  .field input,.field select{width:100%;padding:13px 15px;border-radius:11px;background:var(--bg-2);border:1px solid var(--border);color:var(--white);font-family:var(--body);font-size:14.5px;transition:border-color .2s,box-shadow .2s;}
+  .field select{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300d4b4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+  .field select option{background:#101822;color:var(--white);}
+  .field input::placeholder{color:rgba(144,162,182,.5);}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,180,.16);}
+  .modal .btn-primary{width:100%;margin-top:8px;padding:14px;border-radius:11px;font-size:15px;}
+  .modal-success{text-align:center;padding:16px 0 6px;display:none;}
+  .modal-success .check{width:60px;height:60px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;background:var(--accent-dim);border:1px solid rgba(0,212,180,.4);box-shadow:0 0 36px -6px rgba(0,212,180,.5);color:var(--accent);font-size:28px;}
+  .modal-success h3{margin-bottom:8px;}
+  .modal-success p{color:var(--muted);font-size:13.5px;font-weight:500;}
+
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1!important;transform:none!important;}.art-spin,.art-card{animation:none!important;}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"><style id="claude-agent-animation-styles">
+      @keyframes claude-pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+      #claude-agent-glow-border-inner {
+        animation: claude-pulse 2s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #claude-agent-glow-border-inner {
+          animation: none;
+        }
+      }
+    </style></head>
+<body>
+
+
+
+<!-- ============ REGISTER MODAL ============ -->
+<div class="modal-overlay" id="registerModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="regTitle">
+    <button class="modal-close" id="closeRegister" aria-label="Close">×</button>
+    <form id="registerForm" method="POST" novalidate="">
+      <div class="m-kicker" data-en="Join SCG Elite" data-zh="加入 SCG Elite">Join SCG Elite</div>
+      <h3 id="regTitle" data-en="Start your application" data-zh="开始申请">Start your application</h3>
+      <p class="m-sub" data-en="Create your profile and an advisor will reach out within 48 hours." data-zh="填写资料，顾问将在 48 小时内与您联系。">Create your profile and an advisor will reach out within 48 hours.</p>
+      <div class="field">
+        <label for="reg-name" data-en="Full Name" data-zh="全名">Full Name</label>
+        <input id="reg-name" name="full-name" type="text" placeholder="Enter your full name" data-en-ph="Enter your full name" data-zh-ph="请输入全名" required="" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="reg-phone" data-en="Phone Number" data-zh="电话号码">Phone Number</label>
+        <input id="reg-phone" name="phone" type="tel" placeholder="e.g. 0123456789" data-en-ph="e.g. 0123456789" data-zh-ph="例：0123456789" required="" autocomplete="tel">
+      </div>
+      <div class="field">
+        <label for="reg-age" data-en="Age" data-zh="年龄">Age</label>
+        <input id="reg-age" name="age" type="number" min="18" max="99" placeholder="Your age" data-en-ph="Your age" data-zh-ph="您的年龄" required="">
+      </div>
+      <div class="field">
+        <label for="reg-occupation" data-en="Occupation" data-zh="职业">Occupation</label>
+        <select id="reg-occupation" name="occupation" required="">
+          <option value="employed">Employed (打工)</option>
+          <option value="business">Self-Employed / Business (做生意)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="reg-income" data-en="Monthly Income (RM)" data-zh="月收入 (RM)">Monthly Income (RM)</label>
+        <input id="reg-income" name="income" type="number" min="0" placeholder="e.g. 3000" data-en-ph="e.g. 3000" data-zh-ph="例：3000" required="">
+      </div>
+      <div class="field">
+        <label for="reg-blacklisted" data-en="Blacklisted?" data-zh="是否在黑名单？">Blacklisted?</label>
+        <select id="reg-blacklisted" name="blacklisted" required="">
+          <option value="no" data-en="No" data-zh="否">No</option>
+          <option value="yes" data-en="Yes" data-zh="是">Yes</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" data-en="Submit application →" data-zh="提交申请 →">Submit application →</button>
+    </form>
+    <div class="modal-success" id="registerSuccess">
+      <div class="check">✓</div>
+      <h3 data-en="Application received" data-zh="申请已收到">Application received</h3>
+      <p data-en="Thanks for registering. An SCG Elite advisor will contact you shortly." data-zh="感谢您的注册。SCG Elite 顾问将尽快与您联系。">Thanks for registering. An SCG Elite advisor will contact you shortly.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+  <div class="sb-logo">S</div>
+  <a class="sb-icon" href="#top" data-tip="Home" data-tip-zh="首页" data-en-tip="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"></path><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"></path><path d="M9 20v-6h6v6"></path></svg></a>
+  <a class="sb-icon" href="#products" data-tip="Loans" data-tip-zh="贷款产品" data-en-tip="Loans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18"></path><path d="M7 15h4"></path></svg></a>
+  <a class="sb-icon" href="#products" data-tip="Cash Back" data-tip-zh="现金回赠" data-en-tip="Cash Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10"></path><path d="M14.5 9.2c0-1.2-1.1-2-2.5-2s-2.5.7-2.5 1.9c0 2.6 5 1.4 5 4 0 1.3-1.1 2-2.5 2s-2.5-.8-2.5-2"></path></svg></a>
+  <a class="sb-icon" href="#why" data-tip="Why SCG" data-tip-zh="为何选择" data-en-tip="Why SCG"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5 5.6.6-4.2 3.8 1.2 5.6L12 17.8 7 18l1.2-5.6L4 8.6 9.6 8z"></path></svg></a>
+  <a class="sb-icon" href="#news" data-tip="News" data-tip-zh="资讯" data-en-tip="News"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a1 1 0 0 1 1 1v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"></path><path d="M8 9h6M8 13h6M8 17h3"></path></svg></a>
+  <a class="sb-icon" href="#contact" data-tip="Contact" data-tip-zh="联系我们" data-en-tip="Contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><path d="M4 6l8 6 8-6"></path></svg></a>
+  <div class="sb-spacer"></div>
+  <a class="sb-icon wa" href="https://wa.link/cxg4xy" target="_blank" rel="noopener" data-tip="WhatsApp" data-tip-zh="WhatsApp" data-en-tip="WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.02 3.2c-7.06 0-12.8 5.73-12.8 12.79 0 2.25.59 4.45 1.71 6.39L3.2 28.8l6.6-1.71a12.76 12.76 0 0 0 6.21 1.58h.01c7.05 0 12.79-5.74 12.79-12.79 0-3.42-1.33-6.63-3.75-9.05a12.7 12.7 0 0 0-9.04-3.63zm0 23.43h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.92 1.03 1.05-3.82-.25-.39a10.6 10.6 0 0 1-1.63-5.65c0-5.87 4.78-10.64 10.65-10.64 2.84 0 5.51 1.11 7.52 3.12a10.56 10.56 0 0 1 3.11 7.53c0 5.87-4.77 10.64-10.63 10.64zm5.84-7.97c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1.01 1.25-.18.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.74-.99-2.38-.26-.62-.52-.54-.72-.55-.18-.01-.4-.01-.61-.01-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.66 0 1.57 1.14 3.08 1.3 3.3.16.21 2.25 3.43 5.44 4.81.76.33 1.35.52 1.81.67.76.24 1.46.21 2 .13.61-.09 1.89-.77 2.16-1.52.27-.74.27-1.38.18-1.51-.08-.13-.29-.21-.61-.37z"></path></svg></a>
+</aside>
+
+<div class="shell">
+
+<!-- ============ NAVBAR ============ -->
+<header id="top">
+  <div class="logo"><span class="mark">S</span><span class="name">SCG <em>Elite</em></span></div>
+  <nav class="nav-links">
+    <a href="#products" data-en="Loans" data-zh="贷款产品">Loans</a>
+    <a href="#why" data-en="Why SCG" data-zh="为何选择">Why SCG</a>
+    <a href="#news" data-en="News" data-zh="资讯">News</a>
+    <a href="#contact" data-en="Contact" data-zh="联系我们">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language"><span data-lang="en" class="active">EN</span><span class="div">|</span><span data-lang="zh">中文</span></button>
+    <a class="btn btn-join open-reg" href="#" data-en="Register" data-zh="立即注册">Register</a>
+    <button class="hamburger" id="hamburger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a class="mm-link" href="#products" data-en="Loans" data-zh="贷款产品">Loans</a>
+  <a class="mm-link" href="#why" data-en="Why SCG" data-zh="为何选择">Why SCG</a>
+  <a class="mm-link" href="#how-it-works" data-en="How it works" data-zh="运作方式">How it works</a>
+  <a class="mm-link" href="#news" data-en="News" data-zh="资讯">News</a>
+  <a class="mm-link" href="#contact" data-en="Contact" data-zh="联系我们">Contact</a>
+  <div class="mm-actions">
+    <button class="lang-toggle" type="button" aria-label="Switch language"><span data-lang="en" class="active">EN</span><span class="div">|</span><span data-lang="zh">中文</span></button>
+    <a class="btn btn-join open-reg" href="#" data-en="Register" data-zh="立即注册">Register</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" data-screen-label="Hero">
+  <div class="container hero-grid">
+    <div class="hero-left">
+      <span class="eyebrow"><span class="pulse"></span><span data-en="Approved when others say no" data-zh="别人拒绝，我们批准">Approved when others say no</span></span>
+      <h1 data-en-html="Fast, flexible financing — &lt;span class=&quot;accent&quot;&gt;built for real life&lt;/span&gt;." data-zh-html="快速灵活的融资 —— &lt;span class=&quot;accent&quot;&gt;为真实生活而生&lt;/span&gt;。">Fast, flexible financing — <span class="accent">built for real life</span>.</h1>
+      <p class="lede" data-en="Personal, business and cash-back financing across Malaysia. No payslip headaches, no rigid cut-offs — just fast approvals and an advisor in your corner." data-zh="覆盖全马的个人、商业与现金回赠融资。无需繁琐薪水单，没有僵化门槛 —— 快速审批，专属顾问全程陪伴。">Personal, business and cash-back financing across Malaysia. No payslip headaches, no rigid cut-offs — just fast approvals and an advisor in your corner.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-lg btn-primary open-reg" data-en="Apply now →" data-zh="立即申请 →">Apply now →</a>
+      </div>
+      <div class="or-row"><span class="line"></span><span class="or" data-en="or continue with" data-zh="或通过以下方式">or continue with</span><span class="line"></span></div>
+      <div class="quick-logins">
+        <a class="qlogin wa" href="https://wa.link/cxg4xy" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.02 3.2c-7.06 0-12.8 5.73-12.8 12.79 0 2.25.59 4.45 1.71 6.39L3.2 28.8l6.6-1.71a12.76 12.76 0 0 0 6.21 1.58h.01c7.05 0 12.79-5.74 12.79-12.79 0-3.42-1.33-6.63-3.75-9.05a12.7 12.7 0 0 0-9.04-3.63zm5.84 15.46c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1.01 1.25-.18.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.74-.99-2.38-.26-.62-.52-.54-.72-.55-.18-.01-.4-.01-.61-.01-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.66 0 1.57 1.14 3.08 1.3 3.3.16.21 2.25 3.43 5.44 4.81.76.33 1.35.52 1.81.67.76.24 1.46.21 2 .13.61-.09 1.89-.77 2.16-1.52.27-.74.27-1.38.18-1.51-.08-.13-.29-.21-.61-.37z"></path></svg>WhatsApp</a>
+        <a class="qlogin em open-reg" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Email</a>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-glow"></div>
+      <div class="art-rings"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span></div>
+      <div class="art-spin"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span></div>
+      <div class="art-card">
+        <div class="ac-top"><span class="ac-chip">SCG Elite</span><span class="ac-live"><i></i><span data-en="Approving" data-zh="审批中">Approving</span></span></div>
+        <div class="ac-amt"><em>RM</em>150,000</div>
+        <div class="ac-lab" data-en="Personal loan — approved" data-zh="个人贷款 —— 已获批">Personal loan — approved</div>
+        <div class="ac-bar"><i></i></div>
+        <div class="ac-row"><span data-en="48h approval" data-zh="48小时审批">48h approval</span><span data-en="78% disbursed" data-zh="已放款 78%">78% disbursed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAYMENT BAR ============ -->
+<section class="paybar" data-screen-label="Payment bar">
+  <div class="container">
+    <div class="paybar-card reveal">
+      <span class="pl" data-en="Fast disbursement via" data-zh="快速放款渠道">Fast disbursement via</span>
+      <div class="pay-icons">
+        <span class="pay-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 9h20"></path></svg><span data-en="Bank Transfer" data-zh="银行转账">Bank Transfer</span></span>
+        <span class="pay-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 12a9 9 0 0 1 9-9M3 12a9 9 0 0 0 9 9M21 12a9 9 0 0 0-9-9M21 12a9 9 0 0 1-9 9"></path></svg>DuitNow</span>
+        <span class="pay-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"></rect><path d="M10 18h4"></path></svg><span data-en="e-Wallet" data-zh="电子钱包">e-Wallet</span></span>
+        <span class="pay-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2.6"></circle></svg><span data-en="Cash Pickup" data-zh="现金领取">Cash Pickup</span></span>
+        <span class="pay-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"></path><path d="M4 11h16"></path><circle cx="8" cy="14.5" r="1"></circle></svg><span data-en="Online Banking" data-zh="网上银行">Online Banking</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section id="products" data-screen-label="Products">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-tag" data-en="Our Products" data-zh="贷款产品">Our Products</span>
+      <h2 class="sec-head" data-en-html="Three ways to &lt;em&gt;get funded&lt;/em&gt;" data-zh-html="三种&lt;em&gt;融资&lt;/em&gt;方式">Three ways to <em>get funded</em></h2>
+      <p class="sec-sub" data-en="Whatever you're building, there's a financing track designed around your situation — not someone else's checklist." data-zh="无论您要实现什么，我们都有为您量身定制的融资方案 —— 而非千篇一律的审批清单。">Whatever you're building, there's a financing track designed around your situation — not someone else's checklist.</p>
+    </div>
+    <div class="prod-grid">
+      <article class="pcard reveal">
+        <span class="pc-tag" data-en="Most popular" data-zh="最受欢迎">Most popular</span>
+        <div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M5 21v-1a7 7 0 0 1 14 0v1"></path></svg></div>
+        <div class="pc-zh">个人贷款</div>
+        <h3>Personal Loan</h3>
+        <p data-en="Flexible cash for life's moments — emergencies, education, weddings or consolidating what you already owe. Approved fast, repaid on terms that fit." data-zh="灵活资金应对生活每一刻 —— 应急、教育、婚礼或整合现有债务。审批快速，还款条款贴合您的实际。">Flexible cash for life's moments — emergencies, education, weddings or consolidating what you already owe. Approved fast, repaid on terms that fit.</p>
+        <div class="pc-amt"><span class="lab" data-en="Up to" data-zh="高达">Up to</span><span class="val">RM150,000</span></div>
+        <a href="#" class="pc-cta open-reg" data-en="Apply now →" data-zh="立即申请 →">Apply now →</a>
+      </article>
+      <article class="pcard reveal">
+        <span class="pc-tag" data-en="For owners" data-zh="企业专属">For owners</span>
+        <div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"></rect><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M3 13h18"></path></svg></div>
+        <div class="pc-zh">商业贷款</div>
+        <h3>Business Loan</h3>
+        <p data-en="Capital to grow at your pace — working capital, expansion, stock or equipment. Built for SMEs and self-employed owners the banks overlook." data-zh="助您按自己的节奏成长的资金 —— 营运资金、扩张、库存或设备。专为银行忽视的中小企业与自雇老板而设。">Capital to grow at your pace — working capital, expansion, stock or equipment. Built for SMEs and self-employed owners the banks overlook.</p>
+        <div class="pc-amt"><span class="lab" data-en="Up to" data-zh="高达">Up to</span><span class="val">RM500,000</span></div>
+        <a href="#" class="pc-cta open-reg" data-en="Apply now →" data-zh="立即申请 →">Apply now →</a>
+      </article>
+      <article class="pcard reveal">
+        <span class="pc-tag" data-en="Earn it back" data-zh="赚回价值">Earn it back</span>
+        <div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10"></path><path d="M14.5 9.2c0-1.2-1.1-2-2.5-2s-2.5.7-2.5 1.9c0 2.6 5 1.4 5 4 0 1.3-1.1 2-2.5 2s-2.5-.8-2.5-2"></path></svg></div>
+        <div class="pc-zh">现金回赠计划</div>
+        <h3>Cash Back Project</h3>
+        <p data-en="Get real money back on qualifying financing. Rewards written into every milestone, so value comes back to you instead of disappearing into fees." data-zh="符合条件的融资可获得真实现金回赠。每个里程碑都附带回报，价值回到您手中，而非消失于费用之中。">Get real money back on qualifying financing. Rewards written into every milestone, so value comes back to you instead of disappearing into fees.</p>
+        <div class="pc-amt"><span class="lab" data-en="Cash back up to" data-zh="现金回赠高达">Cash back up to</span><span class="val">RM50,000</span></div>
+        <a href="#" class="pc-cta open-reg" data-en="Apply now →" data-zh="立即申请 →">Apply now →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE ROW ============ -->
+<section id="why" data-screen-label="Why SCG">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-tag" data-en="Why SCG Elite" data-zh="为何选择 SCG Elite">Why SCG Elite</span>
+      <h2 class="sec-head" data-en-html="Built for those the banks &lt;em&gt;turn away&lt;/em&gt;" data-zh-html="为被银行&lt;em&gt;拒之门外&lt;/em&gt;者而生">Built for those the banks <em>turn away</em></h2>
+    </div>
+    <div class="feat-row">
+      <div class="feat reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg></div>
+        <h4 data-en="Approved in 48 hours" data-zh="48 小时获批">Approved in 48 hours</h4>
+        <p data-en="Decisions in hours, not weeks — so opportunity never slips away while you wait." data-zh="以小时计的审批，而非数周 —— 让机会不再因等待而错失。">Decisions in hours, not weeks — so opportunity never slips away while you wait.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"></path></svg></div>
+        <h4 data-en="Minimal documents" data-zh="资料要求少">Minimal documents</h4>
+        <p data-en="No payslip? No EPF stack? We work with what you have — flexible criteria, real people." data-zh="没有薪水单？缺少公积金记录？我们以您现有的资料办事 —— 灵活标准，真人服务。">No payslip? No EPF stack? We work with what you have — flexible criteria, real people.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M3 12h18"></path><path d="M3 18h12"></path></svg></div>
+        <h4 data-en="Transparent terms" data-zh="条款透明">Transparent terms</h4>
+        <p data-en="Clear rates, no hidden weight. What you see in your plan is exactly what you pay." data-zh="清晰利率，没有隐藏负担。计划中所见，即您所付。">Clear rates, no hidden weight. What you see in your plan is exactly what you pay.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><path d="M3 20v-1a5 5 0 0 1 10 0v1"></path><path d="M16 3.5a3 3 0 0 1 0 5.8"></path><path d="M21 20v-1a5 5 0 0 0-4-4.9"></path></svg></div>
+        <h4 data-en="A real advisor" data-zh="专属顾问">A real advisor</h4>
+        <p data-en="A specialist guides you from first question to final payout — never a call-centre script." data-zh="专业顾问从第一个问题到最后放款全程陪伴 —— 绝非客服话术。">A specialist guides you from first question to final payout — never a call-centre script.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW SCG ELITE WORKS (EDUCATIONAL) ============ -->
+<section id="how-it-works" data-screen-label="How SCG Elite Works">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-tag" data-en="The Basics" data-zh="基础须知">The Basics</span>
+      <h2 class="sec-head" data-en-html="How &lt;em&gt;SCG Elite&lt;/em&gt; works" data-zh-html="&lt;em&gt;SCG Elite&lt;/em&gt; 如何运作">How <em>SCG Elite</em> works</h2>
+      <p class="sec-sub" data-en="Straight answers to the questions everyone asks before applying — no fine print, no jargon." data-zh="申请前人人都会问的问题，直截了当地回答 —— 没有小字条款，没有术语。">Straight answers to the questions everyone asks before applying — no fine print, no jargon.</p>
+    </div>
+
+    <div class="edu-grid">
+      <!-- A -->
+      <article class="edu-card reveal">
+        <div class="edu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9.5 13.5l2 2 3.5-3.5"></path></svg></div>
+        <h3 data-en="No payslip? No problem." data-zh="没有薪水单？没问题。">No payslip? No problem.</h3>
+        <p data-en-html="SCG Elite doesn't require a payslip. We assess you on &lt;b&gt;bank statements, business cash flow, or personal assets&lt;/b&gt; — so self-employed workers, gig earners and small business owners who get rejected elsewhere can finally get approved." data-zh-html="SCG Elite 无需薪水单。我们依据&lt;b&gt;银行流水、生意现金流或个人资产&lt;/b&gt;评估您 —— 让在别处被拒的自雇人士、零工与小生意老板，终于能够获批。">SCG Elite doesn't require a payslip. We assess you on <b>bank statements, business cash flow, or personal assets</b> — so self-employed workers, gig earners and small business owners who get rejected elsewhere can finally get approved.</p>
+      </article>
+
+      <!-- B -->
+      <article class="edu-card reveal">
+        <div class="edu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14"></path><path d="M5 12h14"></path><path d="M5 19h9"></path><circle cx="3" cy="5" r="0.6" fill="currentColor"></circle></svg></div>
+        <h3 data-en="What happens after you apply" data-zh="申请之后会发生什么">What happens after you apply</h3>
+        <div class="edu-steps">
+          <div class="estep"><span class="en">1</span><span class="et" data-en="Apply online" data-zh="在线申请">Apply online</span></div>
+          <div class="estep"><span class="en">2</span><span class="et"><span data-en="Advisor reviews your profile" data-zh="顾问审核您的资料">Advisor reviews your profile</span><small data-en="same day" data-zh="当天">same day</small></span></div>
+          <div class="estep"><span class="en">3</span><span class="et"><span data-en="Minimal documents requested" data-zh="索取少量文件">Minimal documents requested</span><small data-en="only what's needed" data-zh="仅需必要文件">only what's needed</small></span></div>
+          <div class="estep"><span class="en">4</span><span class="et"><span data-en="Approval decision" data-zh="审批决定">Approval decision</span><small data-en="24–48 hours" data-zh="24–48 小时">24–48 hours</small></span></div>
+          <div class="estep"><span class="en">5</span><span class="et"><span data-en="Disbursement to your account" data-zh="放款至您的账户">Disbursement to your account</span><small data-en="no hidden stages" data-zh="没有隐藏环节">no hidden stages</small></span></div>
+        </div>
+      </article>
+
+      <!-- C -->
+      <article class="edu-card reveal">
+        <div class="edu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3.1 7.6-7 9-3.9-1.4-7-4.4-7-9V6z"></path><path d="M9.2 12l2 2 3.6-3.8"></path></svg></div>
+        <h3 data-en="Why banks reject you (and why we don't)" data-zh="银行为何拒绝您（而我们不会）">Why banks reject you (and why we don't)</h3>
+        <p data-en-html="Banks use rigid scoring — &lt;b&gt;EPF history, fixed salary, credit score&lt;/b&gt;. SCG Elite looks at the full picture: your &lt;b&gt;cash flow, business potential and real repayment ability&lt;/b&gt;. We've approved clients other lenders turned away three times." data-zh-html="银行使用僵化的评分 —— &lt;b&gt;公积金记录、固定薪资、信用分数&lt;/b&gt;。SCG Elite 着眼全局：您的&lt;b&gt;现金流、生意潜力与真实还款能力&lt;/b&gt;。我们批准过被其他贷方拒绝三次的客户。">Banks use rigid scoring — <b>EPF history, fixed salary, credit score</b>. SCG Elite looks at the full picture: your <b>cash flow, business potential and real repayment ability</b>. We've approved clients other lenders turned away three times.</p>
+      </article>
+
+      <!-- D -->
+      <article class="edu-card reveal">
+        <div class="edu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="12" cy="12" r="2.6"></circle><path d="M7 9.5v5M17 9.5v5"></path></svg></div>
+        <h3 data-en="Loan amounts &amp; repayment — plain English" data-zh="贷款额度与还款 —— 大白话">Loan amounts &amp; repayment — plain English</h3>
+        <div class="edu-list">
+          <div class="erow"><span class="k" data-en="Personal Loan" data-zh="个人贷款">Personal Loan</span><span class="v">RM5,000 – RM150,000</span></div>
+          <div class="erow"><span class="k" data-en="Business Loan" data-zh="商业贷款">Business Loan</span><span class="v" data-en="up to RM500,000" data-zh="高达 RM500,000">up to RM500,000</span></div>
+          <div class="erow"><span class="k" data-en="Cash Back Project" data-zh="现金回赠计划">Cash Back Project</span><span class="v" data-en="up to RM50,000 back" data-zh="回赠高达 RM50,000">up to RM50,000 back</span></div>
+        </div>
+        <p data-en="Repayment is structured around your cash flow — not a fixed bank template." data-zh="还款依据您的现金流安排 —— 而非银行的固定模板。">Repayment is structured around your cash flow — not a fixed bank template.</p>
+      </article>
+
+      <!-- E -->
+      <article class="edu-card wide reveal">
+        <div class="edu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3.1 7.6-7 9-3.9-1.4-7-4.4-7-9V6z"></path><circle cx="12" cy="10.5" r="1.6"></circle><path d="M12 12.2v3"></path></svg></div>
+        <h3 data-en="Is SCG Elite licensed?" data-zh="SCG Elite 是否持牌？">Is SCG Elite licensed?</h3>
+        <p data-en-html="Yes. SCG Elite operates under &lt;b&gt;Malaysia's Moneylenders Act&lt;/b&gt;. Every agreement is legal, transparent and in writing — &lt;b&gt;no hidden fees, no rollover traps&lt;/b&gt;. You'll know exactly what you owe before you sign." data-zh-html="是的。SCG Elite 在&lt;b&gt;马来西亚《放债人法令》&lt;/b&gt;下经营。每份协议都合法、透明且以书面签订 —— &lt;b&gt;没有隐藏费用，没有展期陷阱&lt;/b&gt;。签字前，您将清楚知道自己需偿还多少。">Yes. SCG Elite operates under <b>Malaysia's Moneylenders Act</b>. Every agreement is legal, transparent and in writing — <b>no hidden fees, no rollover traps</b>. You'll know exactly what you owe before you sign.</p>
+        <span class="edu-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span data-en="Legal, transparent, in writing — always." data-zh="合法、透明、书面 —— 始终如一。">Legal, transparent, in writing — always.</span></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS / BLOG ============ -->
+<section id="news" data-screen-label="News">
+  <div class="container">
+    <div class="blog-head reveal">
+      <div>
+        <span class="sec-tag" data-en="News &amp; Insights" data-zh="资讯与洞察">News &amp; Insights</span>
+        <h2 class="sec-head" data-en-html="Smart money, &lt;em&gt;explained simply&lt;/em&gt;" data-zh-html="聪明理财，&lt;em&gt;简单易懂&lt;/em&gt;">Smart money, <em>explained simply</em></h2>
+      </div>
+      <a class="btn nav-rewards" href="#contact" data-en="View all →" data-zh="查看全部 →">View all →</a>
+    </div>
+    <div class="blog-grid">
+      <article class="post reveal">
+        <div class="post-thumb"><span class="post-cat" data-en="Guide" data-zh="指南">Guide</span><span class="pico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a1 1 0 0 1 1 1v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"></path><path d="M8 9h6M8 13h6"></path></svg></span></div>
+        <div class="post-body">
+          <span class="date" data-en="June 2026" data-zh="2026年6月">June 2026</span>
+          <h4 data-en="No payslip? Here's how to still get approved" data-zh="没有薪水单？这样依然能获批">No payslip? Here's how to still get approved</h4>
+          <p data-en="A practical look at the documents that actually matter — and the flexible alternatives SCG accepts." data-zh="实用解析真正重要的文件 —— 以及 SCG 接受的灵活替代方案。">A practical look at the documents that actually matter — and the flexible alternatives SCG accepts.</p>
+          <a class="read open-reg" href="#" data-en="Read more →" data-zh="阅读更多 →">Read more →</a>
+        </div>
+      </article>
+      <article class="post reveal">
+        <div class="post-thumb"><span class="post-cat" data-en="Business" data-zh="商业">Business</span><span class="pico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"></rect><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></span></div>
+        <div class="post-body">
+          <span class="date" data-en="May 2026" data-zh="2026年5月">May 2026</span>
+          <h4 data-en="5 ways SMEs use working capital to grow faster" data-zh="中小企业用营运资金加速成长的5种方式">5 ways SMEs use working capital to grow faster</h4>
+          <p data-en="From bulk stock to new hires — where a business loan creates the biggest return for owners." data-zh="从批量进货到招聘新员工 —— 商业贷款在哪些环节为老板创造最大回报。">From bulk stock to new hires — where a business loan creates the biggest return for owners.</p>
+          <a class="read open-reg" href="#" data-en="Read more →" data-zh="阅读更多 →">Read more →</a>
+        </div>
+      </article>
+      <article class="post reveal">
+        <div class="post-thumb"><span class="post-cat" data-en="Cash Back" data-zh="现金回赠">Cash Back</span><span class="pico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10M14.5 9.2c0-1.2-1.1-2-2.5-2s-2.5.7-2.5 1.9c0 2.6 5 1.4 5 4 0 1.3-1.1 2-2.5 2s-2.5-.8-2.5-2"></path></svg></span></div>
+        <div class="post-body">
+          <span class="date" data-en="May 2026" data-zh="2026年5月">May 2026</span>
+          <h4 data-en="How the Cash Back Project actually pays you" data-zh="现金回赠计划如何真正回馈您">How the Cash Back Project actually pays you</h4>
+          <p data-en="A clear breakdown of the milestones that trigger rewards — and how to claim up to RM50,000." data-zh="清晰拆解触发回赠的里程碑 —— 以及如何领取高达 RM50,000。">A clear breakdown of the milestones that trigger rewards — and how to claim up to RM50,000.</p>
+          <a class="read open-reg" href="#" data-en="Read more →" data-zh="阅读更多 →">Read more →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER CTA ============ -->
+<section class="foot-cta" id="contact" data-screen-label="Footer CTA">
+  <div class="container">
+    <h2 class="reveal" data-en-html="Ready when the banks &lt;em&gt;said no&lt;/em&gt;?" data-zh-html="银行说不，&lt;em&gt;我们说行&lt;/em&gt;？">Ready when the banks <em>said no</em>?</h2>
+    <p class="reveal" data-en="Tell us where you're headed and we'll find the financing to get you there — fast." data-zh="告诉我们您的目标，我们将快速为您找到抵达的融资方案。">Tell us where you're headed and we'll find the financing to get you there — fast.</p>
+    <div class="hero-cta reveal">
+      <a href="#" class="btn btn-lg btn-primary open-reg" data-en="Apply now →" data-zh="立即申请 →">Apply now →</a>
+      <a href="https://wa.link/cxg4xy" target="_blank" rel="noopener" class="btn btn-lg btn-wa"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.02 3.2c-7.06 0-12.8 5.73-12.8 12.79 0 2.25.59 4.45 1.71 6.39L3.2 28.8l6.6-1.71a12.76 12.76 0 0 0 6.21 1.58h.01c7.05 0 12.79-5.74 12.79-12.79 0-3.42-1.33-6.63-3.75-9.05a12.7 12.7 0 0 0-9.04-3.63zm5.84 15.46c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1.01 1.25-.18.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.74-.99-2.38-.26-.62-.52-.54-.72-.55-.18-.01-.4-.01-.61-.01-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.66 0 1.57 1.14 3.08 1.3 3.3.16.21 2.25 3.43 5.44 4.81.76.33 1.35.52 1.81.67.76.24 1.46.21 2 .13.61-.09 1.89-.77 2.16-1.52.27-.74.27-1.38.18-1.51-.08-.13-.29-.21-.61-.37z"></path></svg><span data-en="WhatsApp us" data-zh="WhatsApp 咨询">WhatsApp us</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer data-screen-label="Footer">
+  <div class="container footer-grid">
+    <div class="f-brand">
+      <div class="logo"><span class="mark">S</span><span class="name">SCG <em>Elite</em></span></div>
+      <p class="f-desc" data-en="SCG Elite Finance — a Malaysian financial services company helping good people get the financing they deserve." data-zh="SCG Elite Finance —— 一家马来西亚金融服务公司，助诚实的人获得应得的融资。">SCG Elite Finance — a Malaysian financial services company helping good people get the financing they deserve.</p>
+      <a class="foot-wa" href="https://wa.link/cxg4xy" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.02 3.2c-7.06 0-12.8 5.73-12.8 12.79 0 2.25.59 4.45 1.71 6.39L3.2 28.8l6.6-1.71a12.76 12.76 0 0 0 6.21 1.58h.01c7.05 0 12.79-5.74 12.79-12.79 0-3.42-1.33-6.63-3.75-9.05a12.7 12.7 0 0 0-9.04-3.63zm5.84 15.46c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1.01 1.25-.18.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.74-.99-2.38-.26-.62-.52-.54-.72-.55-.18-.01-.4-.01-.61-.01-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.66 0 1.57 1.14 3.08 1.3 3.3.16.21 2.25 3.43 5.44 4.81.76.33 1.35.52 1.81.67.76.24 1.46.21 2 .13.61-.09 1.89-.77 2.16-1.52.27-.74.27-1.38.18-1.51-.08-.13-.29-.21-.61-.37z"></path></svg>+60 10-901 7156</a>
+    </div>
+    <div class="f-cols">
+      <div class="f-col"><h5 data-en="Products" data-zh="产品">Products</h5><a href="#products" data-en="Personal Loan" data-zh="个人贷款">Personal Loan</a><a href="#products" data-en="Business Loan" data-zh="商业贷款">Business Loan</a><a href="#products" data-en="Cash Back Project" data-zh="现金回赠计划">Cash Back Project</a></div>
+      <div class="f-col"><h5 data-en="Company" data-zh="公司">Company</h5><a href="#why" data-en="Why SCG" data-zh="为何选择">Why SCG</a><a href="#news" data-en="News" data-zh="资讯">News</a><a href="#contact" data-en="Contact" data-zh="联系我们">Contact</a></div>
+      <div class="f-col"><h5 data-en="Legal" data-zh="法律">Legal</h5><a href="#" data-en="Terms" data-zh="条款">Terms</a><a href="#" data-en="Privacy" data-zh="隐私">Privacy</a><a href="#" data-en="Disclosures" data-zh="披露声明">Disclosures</a></div>
+    </div>
+  </div>
+  <div class="container copyright" data-en="© 2026 SCG Elite Finance, Malaysia. All rights reserved. Rates illustrative and subject to approval." data-zh="© 2026 SCG Elite Finance，马来西亚。版权所有。利率仅供参考，须经批准。">© 2026 SCG Elite Finance, Malaysia. All rights reserved. Rates illustrative and subject to approval.</div>
+</footer>
+
+</div><!-- /shell -->
+
+<script>
+/* ---------- REVEAL ---------- */
+(function(){
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ---------- LANGUAGE SWITCHER ---------- */
+(function(){
+  const KEY='scg_lang';
+  const toggles=[...document.querySelectorAll('.lang-toggle')];
+  function apply(lang){
+    document.documentElement.lang=(lang==='zh')?'zh-CN':'en';
+    document.querySelectorAll('[data-en]').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v!==null)el.textContent=v;});
+    document.querySelectorAll('[data-en-html]').forEach(el=>{const v=el.getAttribute('data-'+lang+'-html');if(v!==null)el.innerHTML=v;});
+    document.querySelectorAll('[data-en-ph]').forEach(el=>{const v=el.getAttribute('data-'+lang+'-ph');if(v!==null)el.placeholder=v;});
+    document.querySelectorAll('[data-tip-zh]').forEach(el=>{el.setAttribute('data-tip', lang==='zh'?el.getAttribute('data-tip-zh'):(el.getAttribute('data-en-tip')||el.getAttribute('data-tip')));});
+    document.querySelectorAll('.lang-toggle span[data-lang]').forEach(s=>s.classList.toggle('active',s.getAttribute('data-lang')===lang));
+    document.body.classList.toggle('zh',lang==='zh');
+    try{localStorage.setItem(KEY,lang);}catch(e){}
+  }
+  let cur='en';
+  try{const saved=localStorage.getItem(KEY);if(saved==='zh'||saved==='en')cur=saved;}catch(e){}
+  apply(cur);
+  toggles.forEach(t=>t.addEventListener('click',()=>{cur=(cur==='zh')?'en':'zh';apply(cur);}));
+})();
+
+/* ---------- MOBILE MENU ---------- */
+(function(){
+  const burger=document.getElementById('hamburger');
+  const menu=document.getElementById('mobileMenu');
+  if(!burger||!menu) return;
+  function setOpen(on){burger.classList.toggle('open',on);menu.classList.toggle('open',on);burger.setAttribute('aria-expanded',on?'true':'false');}
+  burger.addEventListener('click',()=>setOpen(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false);});
+  window.addEventListener('resize',()=>{if(window.innerWidth>768)setOpen(false);});
+})();
+
+/* ---------- REGISTER MODAL ---------- */
+(function(){
+  const overlay=document.getElementById('registerModal');
+  const form=document.getElementById('registerForm');
+  const success=document.getElementById('registerSuccess');
+  function open(e){if(e)e.preventDefault();overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>{var n=document.getElementById('reg-name');if(n)n.focus();},400);}
+  function close(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';setTimeout(()=>{form.style.display='';success.style.display='none';form.reset();},380);}
+  document.querySelectorAll('.open-reg').forEach(b=>b.addEventListener('click',open));
+  document.getElementById('closeRegister').addEventListener('click',close);
+  overlay.addEventListener('click',(e)=>{if(e.target===overlay)close();});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&overlay.classList.contains('open'))close();});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    const btn=form.querySelector('button[type="submit"]');
+    btn.disabled=true;
+    fetch('https://formspree.io/f/mnjypbwd',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+    .then(function(resp){
+      if(resp.ok){form.style.display='none';success.style.display='block';}
+      else{btn.disabled=false;alert('Submission failed, please try again.');}
+    })
+    .catch(function(){btn.disabled=false;alert('Network error, please try again.');});
+  });
+})();
+</script>
+
+
+<div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 0; transition: opacity 0.3s ease-in-out;"><div id="claude-agent-glow-border-inner" style="position: absolute; inset: 0px; will-change: opacity; box-shadow: rgba(217, 119, 87, 0.7) 0px 0px 15px inset, rgba(217, 119, 87, 0.5) 0px 0px 25px inset, rgba(217, 119, 87, 0.2) 0px 0px 35px inset;"></div></div><div id="claude-static-indicator-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); align-items: center; justify-content: center; padding: 6px 6px 6px 16px; background: rgb(250, 249, 245); border: 0.5px solid rgba(31, 30, 29, 0.3); border-radius: 14px; box-shadow: rgba(0, 0, 0, 0.15) 0px 40px 80px 0px; z-index: 2147483647; pointer-events: none; white-space: nowrap; user-select: none; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; flex-shrink: 0; margin-right: 8px;">
+        <path d="M3.13946 10.6399L6.28757 8.87462L6.37405 8.73821L6.28757 8.6339H6.13189L5.60432 8.6018L3.80541 8.55366L2.24865 8.48947L0.735135 8.40923H0.492973L0.354595 8.32899L0.181622 8.1685L0.0345946 8.01605L0 7.85557L0.0345946 7.62287L0.138378 7.44634L0.224865 7.40622H0.354595L0.812973 7.44634L1.82486 7.51856L3.34703 7.62287L4.44541 7.68706L6.08 7.85557H6.33946L6.37405 7.75125L6.28757 7.68706L6.21838 7.62287L4.64432 6.55567L2.94054 5.4323L2.04973 4.78235L1.57405 4.45336L1.33189 4.14845L1.22811 3.92377L1.17622 3.69107L1.22811 3.47442L1.33189 3.28185L1.46162 3.13741L1.66054 2.99298H1.87676L2.24865 3.0331L2.39568 3.07322L2.99243 3.53059L4.26378 4.51755L5.92432 5.73721L6.16649 5.93781H6.27892V5.82548L6.16649 5.64092L5.26703 4.01204L4.30703 2.35105L3.87459 1.66098L3.76216 1.25176C3.7391 1.16082 3.69297 0.977332 3.69297 0.970913V0.762287L3.77946 0.505517L3.93513 0.240722L4.18595 0.0882648L4.4627 0H4.67892L4.83459 0.0240722L5.12865 0.0882648L5.4054 0.328987L5.82054 1.27583L6.48649 2.76028L7.52432 4.78235L7.82703 5.38415L7.99135 5.93781L8.05189 6.10632H8.15567V6.01003L8.24216 4.87061L8.39784 3.47442L8.55351 1.67703L8.6054 1.17151L8.85622 0.561685L8.9773 0.417252L9.21946 0.232698H9.35784L9.74703 0.417252L9.97189 0.665998L10.067 0.874624L10.0238 1.17151L9.83351 2.40722L9.46162 4.34102L9.21946 5.64092H9.35784L9.52216 5.47242L10.1795 4.60582L11.2778 3.22568L11.7622 2.68004L12.333 2.07823L12.6962 1.78937L13.0162 1.67703L13.3881 1.78937L13.7168 2.06219L13.8897 2.54363V2.76028L13.6649 3.32197L12.9557 4.22066L12.3676 4.98295L12.0043 5.56871L11.0011 7.02106V7.08526H11.1741L13.0768 6.67603L14.1059 6.49147L15.3341 6.28285L15.5762 6.34704L15.8876 6.53962L15.9481 6.80441L15.8876 7.12538L15.7319 7.34203L14.4173 7.66299L12.8778 7.97593L10.5854 8.51559C10.5705 8.51909 10.56 8.53236 10.56 8.54764C10.56 8.56468 10.573 8.57891 10.59 8.58044L11.6238 8.67402L12.0649 8.69809H13.1459L15.1611 8.85055L15.6886 9.19559L15.9481 9.39619L16 9.62086L15.9481 9.94985L15.8443 10.1023L15.4119 10.3029L15.1351 10.3591L14.0454 10.1023L11.4941 9.49248L10.6205 9.27583H10.4995V9.34804L11.2259 10.0622L12.5665 11.2658L14.2357 12.8225L14.3222 13.0953V13.2076L14.1059 13.5125L13.9243 13.5206L13.8811 13.4804L12.4108 12.3731L12.2984 12.325L11.84 11.8756L10.56 10.7924H10.4735V10.9047L10.7676 11.338L12.333 13.6891L12.4108 14.4112L12.2984 14.6439L11.8919 14.7884L11.667 14.7563L11.4508 14.7081L11.2605 14.5396L10.5254 13.4162L9.5827 11.9719L8.82162 10.672H8.79342C8.76039 10.672 8.73278 10.6972 8.7297 10.73L8.27676 15.5667L8.06919 15.8154L7.6454 16H7.58486L7.17838 15.6951L6.96216 15.1976L7.17838 14.2106L7.43784 12.9268L7.6454 11.9077L7.83567 10.6399L7.95187 10.2164C7.9548 10.2057 7.95069 10.1944 7.94161 10.1881C7.91157 10.1672 7.87034 10.1741 7.84878 10.2037L6.89297 11.5145L5.44 13.4804L4.28973 14.7081L4.01297 14.8205H3.80541L3.5373 14.5717V14.4514L3.58054 14.1304L3.84865 13.7372L5.44 11.7151L6.4 10.4554L7.01872 9.73222C7.04511 9.70139 7.04245 9.65523 7.0127 9.62763C7.00333 9.61894 6.98925 9.61773 6.97854 9.62471L2.75027 12.3811L1.99784 12.4774L1.66919 12.1725L1.71243 11.675L1.86811 11.5145L3.13946 10.6399Z" fill="#D97757"></path>
+      </svg>
+      <span style="vertical-align: middle; color: #141413; font-size: 14px; display: inline-block;">Claude is active in this tab group</span>
+      <div style="display: inline-block; width: 0.5px; height: 32px; background: rgba(31, 30, 29, 0.15); margin: 0 8px; vertical-align: middle;"></div>
+      <button id="claude-static-chat-button" style="position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 6px; background: transparent; border: none; cursor: pointer; pointer-events: auto; vertical-align: middle; width: 32px; height: 32px; border-radius: 8px; transition: background 0.2s;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="#141413" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; display: block;">
+          <path d="M10 2.5C14.1421 2.5 17.5 5.85786 17.5 10C17.5 14.1421 14.1421 17.5 10 17.5H3C2.79779 17.5 2.61549 17.3782 2.53809 17.1914C2.4607 17.0046 2.50349 16.7895 2.64648 16.6465L4.35547 14.9365C3.20124 13.6175 2.5 11.8906 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5ZM10 3.5C6.41015 3.5 3.5 6.41015 3.5 10C3.5 11.7952 4.22659 13.4199 5.40332 14.5967L5.46582 14.6729C5.52017 14.7544 5.5498 14.8508 5.5498 14.9502C5.5498 15.0828 5.49709 15.2099 5.40332 15.3037L4.20703 16.5H10C13.5899 16.5 16.5 13.5899 16.5 10C16.5 6.41015 13.5899 3.5 10 3.5ZM13.29 9.30371C13.3986 9.05001 13.6925 8.93174 13.9463 9.04004C14.2 9.14863 14.3183 9.44253 14.21 9.69629C13.8506 10.536 13.1645 11.25 12.25 11.25C11.6372 11.25 11.128 10.9289 10.75 10.4648C10.372 10.9289 9.86276 11.25 9.25 11.25C8.63724 11.25 8.12801 10.9289 7.75 10.4648C7.37198 10.9289 6.86276 11.25 6.25 11.25C5.97386 11.25 5.75 11.0261 5.75 10.75C5.75 10.4739 5.97386 10.25 6.25 10.25C6.58764 10.25 7.00448 9.97056 7.29004 9.30371L7.32422 9.2373C7.41431 9.09121 7.5749 9 7.75 9C7.9501 9 8.13123 9.11975 8.20996 9.30371L8.32227 9.53516C8.59804 10.0359 8.95442 10.25 9.25 10.25C9.58764 10.25 10.0045 9.97056 10.29 9.30371L10.3242 9.2373C10.4143 9.09121 10.5749 9 10.75 9C10.9501 9 11.1312 9.11975 11.21 9.30371L11.3223 9.53516C11.598 10.0359 11.9544 10.25 12.25 10.25C12.5876 10.25 13.0045 9.97056 13.29 9.30371Z"></path>
+        </svg>
+        <span id="claude-static-chat-tooltip" style="position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); padding: 6px 12px; background: #30302E; color: #FAF9F5; border-radius: 6px; font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">Open chat</span>
+      </button>
+      <button id="claude-static-close-button" style="position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 6px; background: transparent; border: none; cursor: pointer; pointer-events: auto; vertical-align: middle; width: 32px; height: 32px; margin-left: 4px; border-radius: 8px; transition: background 0.2s;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; display: block;">
+          <path d="M15.1464 4.14642C15.3417 3.95121 15.6582 3.95118 15.8534 4.14642C16.0486 4.34168 16.0486 4.65822 15.8534 4.85346L10.7069 9.99997L15.8534 15.1465C16.0486 15.3417 16.0486 15.6583 15.8534 15.8535C15.6826 16.0244 15.4186 16.0461 15.2245 15.918L15.1464 15.8535L9.99989 10.707L4.85338 15.8535C4.65813 16.0486 4.34155 16.0486 4.14634 15.8535C3.95115 15.6583 3.95129 15.3418 4.14634 15.1465L9.29286 9.99997L4.14634 4.85346C3.95129 4.65818 3.95115 4.34162 4.14634 4.14642C4.34154 3.95128 4.65812 3.95138 4.85338 4.14642L9.99989 9.29294L15.1464 4.14642Z" fill="#141413"></path>
+        </svg>
+        <span id="claude-static-close-tooltip" style="position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); padding: 6px 12px; background: #30302E; color: #FAF9F5; border-radius: 6px; font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">Dismiss</span>
+      </button>
+    </div></body></html>
